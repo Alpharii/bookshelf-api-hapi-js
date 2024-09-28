@@ -1,7 +1,16 @@
-export const buildResponse = (h, code, message, data = {}) => {
-    return h.response({
-        status: code === 200 || code === 201 ? 'success' : 'fail',
-        message,
-        data,
-    }).code(code);
-};
+const buildResponse = (h, status, message, code, data = null) => {
+    const response = {
+      status,
+      message,
+    };
+  
+    // Menambahkan `data` hanya jika tersedia
+    if (data !== null) {
+      response.data = data;
+    }
+  
+    return h.response(response).code(code);
+  };
+
+  export default buildResponse;
+  
